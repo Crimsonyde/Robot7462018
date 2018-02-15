@@ -45,8 +45,9 @@ public class Robot extends TimedRobot {
     public static DriveTrain driveTrain;
     public static Arm arm;
     public static Intake intake;
-    private UsbCamera camera0;
-	private UsbCamera camera1;
+    //private UsbCamera camera0;
+	//private UsbCamera camera1;
+    UsbCamera camera1;
 
 	final String autonomousTest = "Auto Test";
     final String AutoLeftBlue = "Auto Left Blue";
@@ -66,29 +67,21 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-        RobotMap.init();
+    	
+    	UsbCamera Cam1 = CameraServer.getInstance().startAutomaticCapture();
+		//AxisCamera Camera = CameraServer.getInstance().addAxisCamera("axis-camera.local");
+		Cam1.setResolution(640,480);
 
-        driveTrain = new DriveTrain();
-        arm = new Arm();
-        intake = new Intake();
-
-        // OI must be constructed after subsystems. If the OI creates Commands
-        //(which it very likely will), subsystems are not guaranteed to be
-        // constructed yet. Thus, their requires() statements may grab null
-        // pointers. Bad news. Don't move it.
-        oi = new OI();
-
-        // Add commands to Autonomous Sendable Chooser
-      
-        
-        Thread t = new Thread(() -> {
+    	/*
+    	
+    	Thread t = new Thread(() -> {
 			boolean allowCam1 = false;
 			UsbCamera Cam1 = CameraServer.getInstance().startAutomaticCapture();
 			Cam1.setResolution(320, 240);
-			Cam1.setFPS(20);
+			Cam1.setFPS(15);
 			UsbCamera Cam2 = CameraServer.getInstance().startAutomaticCapture();
 			Cam2.setResolution(320, 240);
-			Cam2.setFPS(20);
+			Cam2.setFPS(15);
 			// MjpegServer server = new MjpegServer("Output to dashboard",
 			// 5800);
 
@@ -118,6 +111,22 @@ public class Robot extends TimedRobot {
 
 		});
 		t.start();
+    	
+    	*/
+        RobotMap.init();
+
+        driveTrain = new DriveTrain();
+        arm = new Arm();
+        intake = new Intake();
+
+        // OI must be constructed after subsystems. If the OI creates Commands
+        //(which it very likely will), subsystems are not guaranteed to be
+        // constructed yet. Thus, their requires() statements may grab null
+        // pointers. Bad news. Don't move it.
+        oi = new OI();
+
+        // Add commands to Autonomous Sendable Chooser
+             
 		
 		/*
 		camera0 = CameraServer.getInstance().startAutomaticCapture();
@@ -234,11 +243,11 @@ public class Robot extends TimedRobot {
 			
 		case AutoMiddleBlue:
 			if (gameData.charAt(0) == 'L') {
-				autonomousCommand = new AutoMiddleLeft();
+				autonomousCommand = new AutoMiddleRight();
 				break;
 			}
 			else {
-				autonomousCommand = new AutoMiddleRight();
+				autonomousCommand = new AutoMiddleLeft();
 				break;
 			}
 		}

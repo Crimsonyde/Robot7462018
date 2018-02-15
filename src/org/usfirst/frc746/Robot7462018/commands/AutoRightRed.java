@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoRightRed extends CommandGroup {
 
     public AutoRightRed() {
-    	addSequential(new autoMove(0,0,0));
-    	addSequential(new autoMove(0,0,0));
-    	addSequential(new autoMove(0,0,0));
-    	addParallel(new timedExtend(1));
-    	addSequential(new autoMove(0,0,0));
-    	addParallel (new timedRetract(1));
-    	addSequential(new autoMove(0,0,0));
+    	addSequential(new autoMove(.60,.60,2.4));
+    	addSequential(new autoMove(-.4,.4,0.72));
+    	addParallel(new timedExtend(2.9));
+    	addSequential(new autoMove(.3,.3,1));
+    	addSequential(new autoNothing(1));
+    	addParallel (new timedRetract(2));
+    	addSequential(new autoMove(-.3,-.3,1));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

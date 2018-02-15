@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoLeftRed extends CommandGroup {
 
     public AutoLeftRed() {
-    	addSequential(new autoMove(.60,.60,2));
+    	addSequential(new autoMove(.60,.60,2.15));
     	addSequential(new autoMove(.4,-.4,0.75));
     	addParallel(new timedExtend(2.9));
     	addSequential(new autoMove(.3,.3,.8));

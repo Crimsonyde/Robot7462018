@@ -8,13 +8,17 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoMiddleRight extends CommandGroup {
 
     public AutoMiddleRight() {
-    	addSequential(new autoMove(0,0,0));
-    	addSequential(new autoMove(0,0,0));
-    	addSequential(new autoMove(0,0,0));
-    	addParallel(new timedExtend(1));
-    	addSequential(new autoMove(0,0,0));
-    	addParallel (new timedRetract(1));
-    	addSequential(new autoMove(0,0,0));
+    	addSequential(new autoMove(.6,.35,2.2));
+    	addSequential(new autoMove(0,.4,1.5));
+    	addParallel(new timedExtend(2.9));
+    	addSequential(new autoMove(.4,.4,1.4));
+    	addSequential(new autoNothing(1.5));
+    	//addSequential(new autoMove(0,0,0));
+    	addParallel (new timedRetract(2));
+    	addSequential(new autoMove(-.5,-.7,1.5));
+    	addSequential(new autoNothing(1));
+    	addSequential(new autoMove(.65,.5,2));
+    	addSequential(new autoMove(.2,.5,1.2));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
