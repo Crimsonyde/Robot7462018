@@ -31,8 +31,8 @@ public class robotIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.rightIntakeMotor(.65);
-    	Robot.intake.leftIntakeMotor(-.65);
+    	Robot.intake.rightIntakeMotor(.45);
+    	Robot.intake.leftIntakeMotor(-.45);
     }
 
     // Make this return true when this Command no longer needs to run execute()

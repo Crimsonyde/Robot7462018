@@ -68,9 +68,9 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
     	
-    	UsbCamera Cam1 = CameraServer.getInstance().startAutomaticCapture();
+
 		//AxisCamera Camera = CameraServer.getInstance().addAxisCamera("axis-camera.local");
-		Cam1.setResolution(640,480);
+		
 
     	/*
     	
@@ -151,6 +151,11 @@ public class Robot extends TimedRobot {
 	       //chooser.addDefault("Autonomous Test", new autonomousTest());
 	      SmartDashboard.putData("Auto mode", chooser);
 		
+	      UsbCamera Cam1 = CameraServer.getInstance().startAutomaticCapture();
+			//AxisCamera Camera = CameraServer.getInstance().addAxisCamera("axis-camera.local");
+			Cam1.setResolution(320,240);
+			Cam1.setFPS(15);
+
     }
 
     /**
