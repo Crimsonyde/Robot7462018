@@ -150,8 +150,9 @@ public class Robot extends TimedRobot {
 	       //chooser.addObject("Auto Left Blue", new AutoLeftBlue());
 	       //chooser.addDefault("Autonomous Test", new autonomousTest());
 	      SmartDashboard.putData("Auto mode", chooser);
-		
+	
 	      UsbCamera Cam1 = CameraServer.getInstance().startAutomaticCapture();
+	      
 			//AxisCamera Camera = CameraServer.getInstance().addAxisCamera("axis-camera.local");
 			Cam1.setResolution(320,240);
 			Cam1.setFPS(15);
@@ -194,66 +195,75 @@ public class Robot extends TimedRobot {
 			break;
 		
 		case AutoLeftBlue:
-			if(gameData.charAt(0) == 'L') {
-				autonomousCommand = new AutoLeftBlue();
-				break;
-			}
-			else {
-				autonomousCommand = new AutoStraight();
-				break;
+			if(gameData.length() > 0) {
+				if(gameData.charAt(0) == 'L') {
+					autonomousCommand = new AutoLeftBlue();
+					break;
+				}
+				else {
+					autonomousCommand = new AutoStraight();
+					break;
+				}
 			}
 				
 		case AutoLeftRed:
-			if (gameData.charAt(0) == 'L') {
-				autonomousCommand = new AutoLeftRed();
-				break;
-			}
-			else {
-				autonomousCommand = new AutoStraight();
-				break;
-			}
-			
+			if(gameData.length() > 0) {    
+				if (gameData.charAt(0) == 'L') {
+					autonomousCommand = new AutoLeftRed();
+					break;
+				}
+				else {
+					autonomousCommand = new AutoStraight();
+					break;
+				}
+			}	
 		
 		case AutoRightBlue:
-			if (gameData.charAt(0) == 'L') {
-				autonomousCommand = new AutoRightBlue();
-				break;
+			if(gameData.length() > 0) {            
+				if (gameData.charAt(0) == 'L') {
+					autonomousCommand = new AutoRightBlue();
+					break;
+				}
+				else {
+					autonomousCommand = new AutoStraight();	
+					break;
+				}
 			}
-			else {
-				autonomousCommand = new AutoStraight();	
-				break;
-			}
-			
 		
 		case AutoRightRed:
-			if (gameData.charAt(0) == 'L') {				
-				autonomousCommand = new AutoRightRed();
-				break;
-			}
-			else {
-				autonomousCommand = new AutoStraight();
-				break;
+			if(gameData.length() > 0) {          
+				if (gameData.charAt(0) == 'L') {				
+					autonomousCommand = new AutoRightRed();
+					break;
+				}
+				else {
+					autonomousCommand = new AutoStraight();
+					break;
+				}
 			}
 			
 			
 		case AutoMiddleRed:
-			if (gameData.charAt(0) == 'L') {
-				autonomousCommand = new AutoMiddleLeft();
-				break;
+			if(gameData.length() > 0) {
+				if (gameData.charAt(0) == 'L') {
+					autonomousCommand = new AutoMiddleLeft();
+					break;
+				}
+				else {			
+					autonomousCommand = new AutoMiddleRight();	
+					break;
+				}
 			}
-			else {			
-				autonomousCommand = new AutoMiddleRight();	
-				break;
-			}
-			
 		case AutoMiddleBlue:
-			if (gameData.charAt(0) == 'L') {
-				autonomousCommand = new AutoMiddleRight();
-				break;
-			}
-			else {
-				autonomousCommand = new AutoMiddleLeft();
-				break;
+			if(gameData.length() > 0) {           
+				if (gameData.charAt(0) == 'L') {
+					autonomousCommand = new AutoMiddleRight();
+					break;
+				}
+				else {
+					autonomousCommand = new AutoMiddleLeft();
+					break;
+				}
 			}
 		}
 		
