@@ -93,11 +93,7 @@ public class Robot extends TimedRobot {
 	      chooser.addObject("Delayed Straight", AutoDelayStraight);
 	      chooser.addObject("Middle Left Straight", AutoLeftMid);
 	      chooser.addObject("Middle Right Straight", AutoRightMid);
-	      //chooser.addDefault("Auto Test", autonomousTest);
-	   	        	               
-	       //chooser = new SendableChooser<Command>();
-	       //chooser.addObject("Auto Left Blue", new AutoLeftBlue());
-	       //chooser.addDefault("Autonomous Test", new autonomousTest());
+
 	      SmartDashboard.putData("Auto mode", chooser);
 	
     }
