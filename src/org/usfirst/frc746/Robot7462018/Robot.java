@@ -45,18 +45,14 @@ public class Robot extends TimedRobot {
     public static DriveTrain driveTrain;
     public static Arm arm;
     public static Intake intake;
-    //private UsbCamera camera0;
-	//private UsbCamera camera1;
-    UsbCamera camera1;
-
-	final String autonomousTest = "Auto Test";
-    final String AutoLeftBlue = "Auto Left Blue";
-    final String AutoLeftRed = "Auto Left Red";
-    final String AutoMiddleRed = "Middle Red Alliance";
-    final String AutoMiddleBlue = "Middle Blue Alliance";
-    final String AutoRightBlue = "Auto Right Blue";
-    final String AutoRightRed = "Auto Right Red";
+    UsbCamera frontCam;
+	UsbCamera rearCam;
+   
+    final String AutoLeftRed = "Auto Left Switch";
+    final String AutoMiddleRed = "Middle Switch";
+    final String AutoRightRed = "Auto Right Switch";
     final String AutoStraight = "Auto Straight";
+    final String AutoDelayStraight = "Delayed Straight";
     final String AutoLeftMid = "Middle Left Straight";
     final String AutoRightMid = "Middle Right Straight";
 
@@ -68,51 +64,6 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
     	
-
-		//AxisCamera Camera = CameraServer.getInstance().addAxisCamera("axis-camera.local");
-		
-
-    	/*
-    	
-    	Thread t = new Thread(() -> {
-			boolean allowCam1 = false;
-			UsbCamera Cam1 = CameraServer.getInstance().startAutomaticCapture();
-			Cam1.setResolution(320, 240);
-			Cam1.setFPS(15);
-			UsbCamera Cam2 = CameraServer.getInstance().startAutomaticCapture();
-			Cam2.setResolution(320, 240);
-			Cam2.setFPS(15);
-			// MjpegServer server = new MjpegServer("Output to dashboard",
-			// 5800);
-
-			CvSink cvSink1 = CameraServer.getInstance().getVideo(Cam1);
-			CvSink cvSink2 = CameraServer.getInstance().getVideo(Cam2);
-			CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 320, 240);
-			Mat image = new Mat();
-			while (!Thread.interrupted()) {
-
-				if (oi.getDriver1().getRawButton(9)) {
-					allowCam1 = !allowCam1;
-				}
-				if (allowCam1) {
-
-					cvSink2.setEnabled(false);
-					cvSink1.setEnabled(true);
-					cvSink1.grabFrame(image);
-				} else {
-					cvSink1.setEnabled(false);
-					cvSink2.setEnabled(true);
-					cvSink2.grabFrame(image);
-
-				}
-				outputStream.putFrame(image);
-
-			}
-
-		});
-		t.start();
-    	
-    	*/
         RobotMap.init();
 
         driveTrain = new DriveTrain();
@@ -128,35 +79,27 @@ public class Robot extends TimedRobot {
         // Add commands to Autonomous Sendable Chooser
              
 		
-		/*
-		camera0 = CameraServer.getInstance().startAutomaticCapture();
-		camera1 = CameraServer.getInstance().startAutomaticCapture();
-		 */
+		
+		frontCam = CameraServer.getInstance().startAutomaticCapture();
+		rearCam = CameraServer.getInstance().startAutomaticCapture();
+		 
 		
 		  autonomousCommand = new AutonomousCommand();
 		  
-	      chooser.addObject("Auto Left Blue",  AutoLeftBlue);
-	      chooser.addObject("Auto Left Red", AutoLeftRed);
-	      chooser.addObject("Middle Red Alliance", AutoMiddleRed);
-	      chooser.addObject("Middle Blue Alliance", AutoMiddleBlue);
-	      chooser.addObject("Auto Right Blue", AutoRightBlue);
-	      chooser.addObject("Auto Right Red", AutoRightRed);
-	      chooser.addObject("Auto Straight", AutoStraight);
+	      chooser.addObject("Auto Left Switch", AutoLeftRed);
+	      chooser.addObject("Middle Switch", AutoMiddleRed);
+	      chooser.addObject("Auto Right Switch", AutoRightRed);
+	      chooser.addDefault("Auto Straight", AutoStraight);
+	      chooser.addObject("Delayed Straight", AutoDelayStraight);
 	      chooser.addObject("Middle Left Straight", AutoLeftMid);
 	      chooser.addObject("Middle Right Straight", AutoRightMid);
-	      chooser.addDefault("Auto Test", autonomousTest);
+	      //chooser.addDefault("Auto Test", autonomousTest);
 	   	        	               
 	       //chooser = new SendableChooser<Command>();
 	       //chooser.addObject("Auto Left Blue", new AutoLeftBlue());
 	       //chooser.addDefault("Autonomous Test", new autonomousTest());
 	      SmartDashboard.putData("Auto mode", chooser);
 	
-	      UsbCamera Cam1 = CameraServer.getInstance().startAutomaticCapture();
-	      
-			//AxisCamera Camera = CameraServer.getInstance().addAxisCamera("axis-camera.local");
-			Cam1.setResolution(320,240);
-			Cam1.setFPS(15);
-
     }
 
     /**
@@ -185,27 +128,11 @@ public class Robot extends TimedRobot {
         System.out.println("Auto selected: " + autoSelected);
 		switch (autoSelected) {
 		
-		case autonomousTest:
-			default:
-			autonomousCommand = new autonomousTest();
-			break;
 		
 		case AutoStraight:
 			autonomousCommand = new AutoStraight();
 			break;
-		
-		case AutoLeftBlue:
-			if(gameData.length() > 0) {
-				if(gameData.charAt(0) == 'L') {
-					autonomousCommand = new AutoLeftBlue();
-					break;
-				}
-				else {
-					autonomousCommand = new AutoStraight();
-					break;
-				}
-			}
-				
+						
 		case AutoLeftRed:
 			if(gameData.length() > 0) {    
 				if (gameData.charAt(0) == 'L') {
@@ -217,19 +144,7 @@ public class Robot extends TimedRobot {
 					break;
 				}
 			}	
-		
-		case AutoRightBlue:
-			if(gameData.length() > 0) {            
-				if (gameData.charAt(0) == 'L') {
-					autonomousCommand = new AutoRightBlue();
-					break;
-				}
-				else {
-					autonomousCommand = new AutoStraight();	
-					break;
-				}
-			}
-		
+
 		case AutoRightRed:
 			if(gameData.length() > 0) {          
 				if (gameData.charAt(0) == 'L') {				
@@ -241,8 +156,7 @@ public class Robot extends TimedRobot {
 					break;
 				}
 			}
-			
-			
+						
 		case AutoMiddleRed:
 			if(gameData.length() > 0) {
 				if (gameData.charAt(0) == 'L') {
@@ -254,17 +168,10 @@ public class Robot extends TimedRobot {
 					break;
 				}
 			}
-		case AutoMiddleBlue:
-			if(gameData.length() > 0) {           
-				if (gameData.charAt(0) == 'L') {
-					autonomousCommand = new AutoMiddleRight();
-					break;
-				}
-				else {
-					autonomousCommand = new AutoMiddleLeft();
-					break;
-				}
-			}
+		
+
+			
+			
 		}
 		
     	//autonomousCommand = (Command) chooser.getSelected();    
@@ -296,14 +203,12 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {   	
         Scheduler.getInstance().run();
         
-        
-        /*
-        if (oi.getDriver1().getRawButton(9)) {
-			NetworkTable.getTable("").putString("CameraSelection", camera0.getName());
-		} else if (oi.getDriver1().getRawButton(1)) {
-			NetworkTable.getTable("").putString("CameraSelection", camera1.getName());
+          if (oi.getDriver1().getRawButton(9)) {
+			NetworkTable.getTable("").putString("CameraSelection", frontCam.getName());
+		} else if (oi.getDriver1().getRawButton(10)) {
+			NetworkTable.getTable("").putString("CameraSelection", rearCam.getName());
 		}
-		*/
+               
 	}
 	
     }
