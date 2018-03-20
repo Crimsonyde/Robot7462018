@@ -164,6 +164,10 @@ public class Robot extends TimedRobot {
 					break;
 				}
 			}
+			
+		case AutoDelayStraight:
+			autonomousCommand = new AutoDelayMove();
+			break;
 		
 
 			
@@ -198,6 +202,8 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {   	
         Scheduler.getInstance().run();
+        
+       // Robot.driveTrain.drive(Robot.oi.getDriver1());
         
           if (oi.getDriver1().getRawButton(9)) {
 			NetworkTable.getTable("").putString("CameraSelection", frontCam.getName());

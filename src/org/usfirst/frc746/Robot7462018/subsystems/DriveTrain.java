@@ -72,7 +72,7 @@ public class DriveTrain extends Subsystem {
 		
 
 	public void drive(Joystick driver) {
-		setTankDrive(-driver.getY(), -driver.getAxis(AxisType.kThrottle), true);
+		getArcadeDrive(-driver.getAxis(AxisType.kThrottle), -driver.getAxis(AxisType.kTwist) , true);
 	}
 	
 }

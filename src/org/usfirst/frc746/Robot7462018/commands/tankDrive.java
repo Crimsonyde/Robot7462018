@@ -17,9 +17,14 @@ import org.usfirst.frc746.Robot7462018.Robot;
  *
  */
 public class tankDrive extends Command {
+	double left;
+	double right;
+	
 
 
-    public tankDrive() {
+    public tankDrive(double leftValue, double rightValue) {
+    	left = leftValue;
+    	right = rightValue;
     	requires (Robot.driveTrain);
 
 
@@ -34,7 +39,7 @@ public class tankDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	Robot.driveTrain.drive(Robot.oi.getDriver1());
+    	Robot.driveTrain.setTankDrive(left, right, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()

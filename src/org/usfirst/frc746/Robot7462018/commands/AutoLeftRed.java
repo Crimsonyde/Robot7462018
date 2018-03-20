@@ -11,8 +11,8 @@ public class AutoLeftRed extends CommandGroup {
     	addSequential(new autoMove(.60,.60,2.15));
     	addSequential(new autoMove(.4,-.4,0.75));
     	addParallel(new timedExtend(2.9));
-    	addSequential(new autoMove(.3,.3,.8));
-    	addSequential(new autoNothing(1));
+    	addSequential(new autoMove(.5,.5,.8));
+    	addSequential(new autoNothing(3));
     	addParallel (new timedRetract(2));
     	addSequential(new autoMove(-.3,-.3,1));
     	

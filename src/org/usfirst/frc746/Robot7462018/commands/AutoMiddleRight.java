@@ -9,7 +9,7 @@ public class AutoMiddleRight extends CommandGroup {
 
     public AutoMiddleRight() {
     	addSequential(new autoMove(.6,.35,2.2));
-    	addSequential(new autoMove(0,.4,1.5));
+    	addSequential(new autoMove(0,.4,1.3));
     	addParallel(new timedExtend(2.9));
     	addSequential(new autoMove(.4,.4,1.4));
     	addSequential(new autoNothing(1.5));
