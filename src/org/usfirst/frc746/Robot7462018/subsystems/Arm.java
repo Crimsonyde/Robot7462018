@@ -11,8 +11,11 @@
 
 package org.usfirst.frc746.Robot7462018.subsystems;
 
+import org.usfirst.frc746.Robot7462018.Robot;
 import org.usfirst.frc746.Robot7462018.RobotMap;
 import org.usfirst.frc746.Robot7462018.commands.*;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 
@@ -31,7 +34,7 @@ public class Arm extends Subsystem {
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
-
+    	setDefaultCommand(new armControl());
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
@@ -49,6 +52,10 @@ public class Arm extends Subsystem {
 			armMotor.set(speed);
 		}
 	}
+    
+    public void armJoysticks(Joystick arm) {
+    	armMotor.set(Robot.oi.operator2.getY());
+    }
 
 	public double getIntakeMotor() {
 		return armMotor.get();
